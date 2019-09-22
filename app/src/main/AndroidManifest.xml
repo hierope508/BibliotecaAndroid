@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Consulta"></activity>
-        <activity android:name=".Livros" />
-        <activity android:name=".Cat_Livros" />
-        <activity android:name=".Cat_Leitores" />
-        <activity android:name=".Clientes" />
-        <activity android:name=".Cadastro" />
+        <activity android:name=".View.Consulta"></activity>
+        <activity android:name=".View.Livros" />
+        <activity android:name=".View.Cat_Livros" />
+        <activity android:name=".View.Cat_Leitores" />
+        <activity android:name=".View.Clientes" />
+        <activity android:name=".View.Cadastro" />
         <activity android:name=".ui.login.LoginActivity" android:label="@string/title_activity_login" >
         </activity>
         <activity android:name=".Splash">
