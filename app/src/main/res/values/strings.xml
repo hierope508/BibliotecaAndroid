@@ -11,5 +11,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="SplashMainText">LEIAQUI</string>
     <string name="SplashSubText">Aps Dispositivos Móveis</string>
+    <string name="btnConsulta">Consultar</string>
+    <string name="btnCadastro">Cadastrar</string>
 </resources>
 
