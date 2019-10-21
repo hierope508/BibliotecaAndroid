@@ -11,7 +11,18 @@
     <string name="login_failed">"Login failed"</string>
     <string name="SplashMainText">LEIAQUI</string>
     <string name="SplashSubText">Aps Dispositivos Móveis</string>
-    <string name="btnConsulta">Consultar</string>
-    <string name="btnCadastro">Cadastrar</string>
+    <string name="lbl_Consultar"> Consultar </string>
+    <string name="lbl_Cadastrar"> Cadastrar </string>
+
+    <string name="txt_CatLeitores">Cat Leitores</string>
+    <string name="txt_CatLivros">Cat Livros</string>
+    <string name="txt_Clietes">Clientes</string>
+    <string name="txt_Livros">Livros</string>
+
+    <string name="txt_CodCatLeitor">Código da Categoria</string>
+    <string name="txt_DescCatLeitor">Descrição da Categoria</string>
+    <string name="txt_MaxCatLeitor">Número Max. Dias Emprest.</string>
+
+
 </resources>
 
