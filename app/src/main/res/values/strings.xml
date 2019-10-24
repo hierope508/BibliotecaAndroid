@@ -19,8 +19,8 @@
     <string name="txt_Clietes">Clientes</string>
     <string name="txt_Livros">Livros</string>
 
-    <string name="txt_CodCatLeitor">Código da Categoria</string>
-    <string name="txt_DescCatLeitor">Descrição da Categoria</string>
+    <string name="txt_CodCat">Código da Categoria</string>
+    <string name="txt_DescCat">Descrição da Categoria</string>
     <string name="txt_MaxCatLeitor">Número Max. Dias Emprest.</string>
 
 

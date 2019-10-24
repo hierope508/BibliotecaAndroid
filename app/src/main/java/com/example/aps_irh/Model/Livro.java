@@ -2,7 +2,7 @@ package com.example.aps_irh.Model;
 
 import java.util.Date;
 
-public class Livro {
+public class Livro extends Abstract_Cadastro{
     private int id;
     private String cod;
     private String ISBN;
@@ -14,6 +14,10 @@ public class Livro {
     private int numEdicao;
     private String editora;
     private int numPaginas;
+
+    public Livro(){
+
+    }
 
     public Livro(int id, String cod, String ISBN, String titulo, CatLivro catLivro, String[] autores,
         String[] palavrasChave, Date dataPublicacao, int numEdicao, String editora, int numPaginas) {
@@ -112,5 +116,15 @@ public class Livro {
 
     public void setNumPaginas(int numPaginas) {
         this.numPaginas = numPaginas;
+    }
+
+    @Override
+    public void Cadastrar() {
+
+    }
+
+    @Override
+    public void Atualizar() {
+
     }
 }

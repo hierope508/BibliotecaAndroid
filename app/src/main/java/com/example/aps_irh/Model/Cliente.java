@@ -1,11 +1,15 @@
 package com.example.aps_irh.Model;
 
-public class Cliente {
+public class Cliente extends Abstract_Cadastro{
 
     private String nome;
     private String endereco;
     private String telefone;
     private String email;
+
+    public Cliente(){
+
+    }
 
     public Cliente(String nome, String endereco, String telefone, String email) {
         this.nome = nome;
@@ -44,5 +48,15 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public void Cadastrar() {
+
+    }
+
+    @Override
+    public void Atualizar() {
+
     }
 }

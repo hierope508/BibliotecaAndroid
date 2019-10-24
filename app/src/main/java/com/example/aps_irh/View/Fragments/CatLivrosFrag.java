@@ -1,4 +1,4 @@
-package com.example.aps_irh;
+package com.example.aps_irh.View.Fragments;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -12,24 +12,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class BlankFragment extends Fragment {
+import com.example.aps_irh.R;
 
-    private BlankViewModel mViewModel;
+public class CatLivrosFrag extends Fragment {
 
-    public static BlankFragment newInstance() {
-        return new BlankFragment();
+    private CatLivrosViewModel mViewModel;
+
+    public static CatLivrosFrag newInstance() {
+        return new CatLivrosFrag();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.blank_fragment, container, false);
+        return inflater.inflate(R.layout.cat_livros_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(BlankViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(CatLivrosViewModel.class);
         // TODO: Use the ViewModel
     }
 

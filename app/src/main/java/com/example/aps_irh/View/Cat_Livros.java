@@ -11,6 +11,6 @@ public class Cat_Livros extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cat__livros);
+        setContentView(R.layout.activity_cat_livros);
     }
 }
