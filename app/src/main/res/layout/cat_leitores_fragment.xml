@@ -9,50 +9,49 @@
 
     <Button
         android:id="@+id/btn_CadastrarCatLei"
-        android:layout_width="98dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/lbl_Cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.663" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/txt_descCatLeit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="12dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/txt_CodCatLeit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/txt_NumMaxCatLeit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="2dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_CodCatLeit" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/txt_CodCatLeit"
+        android:layout_width="216dp"
+        android:layout_height="59dp"
         android:layout_marginTop="148dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="147dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/btn_CadastrarCatLei"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:text="@string/txt_MaxCatLeitor"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txt_NumMaxCatLeit"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -71,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:text="@string/txt_CodCat"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txt_CodCatLeit"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -80,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:text="@string/txt_DescCat"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText3"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txt_descCatLeit"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

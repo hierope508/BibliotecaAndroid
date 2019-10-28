@@ -1,5 +1,9 @@
 package com.example.aps_irh.Model;
 
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.aps_irh.Control.CriaBanco;
+
 import java.util.Date;
 
 public class Livro extends Abstract_Cadastro{
@@ -14,6 +18,8 @@ public class Livro extends Abstract_Cadastro{
     private int numEdicao;
     private String editora;
     private int numPaginas;
+    private SQLiteDatabase db;
+    private CriaBanco banco;
 
     public Livro(){
 

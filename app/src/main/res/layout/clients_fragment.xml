@@ -7,14 +7,136 @@
     android:layout_height="match_parent"
     tools:context=".View.Fragments.ClientsFrag">
 
-    <Button
-        android:id="@+id/btn_clientes"
+    <EditText
+        android:id="@+id/txt_endereco3"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="31dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="@+id/txt_NomeCliente"
+        app:layout_constraintStart_toStartOf="@+id/txt_telefone"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/txt_DescCat"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_endereco3"
+        app:layout_constraintEnd_toStartOf="@+id/txt_endereco3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/txt_endereco2"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/txt_endereco3"
+        app:layout_constraintEnd_toEndOf="@+id/txt_endereco3"
+        app:layout_constraintStart_toStartOf="@+id/txt_endereco3"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/txt_DescCat"
+        app:layout_constraintEnd_toStartOf="@+id/txt_endereco2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <Button
+        android:id="@+id/btn_CadastrarClientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_Cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.695" />
+
+    <EditText
+        android:id="@+id/txt_NomeCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/txt_telefone"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/txt_CodCat"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txt_NomeCliente"
+        app:layout_constraintEnd_toStartOf="@+id/txt_NomeCliente"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/txt_telefone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="2dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/txt_MaxCatLeitor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_telefone" />
+
+    <EditText
+        android:id="@+id/txt_endereco"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginBottom="128dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_endereco3"
+        app:layout_constraintEnd_toEndOf="@+id/txt_endereco2"
+        app:layout_constraintStart_toStartOf="@+id/txt_endereco2"
+        app:layout_constraintTop_toTopOf="@+id/txt_NomeCliente" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/txt_DescCat"
+        app:layout_constraintEnd_toStartOf="@+id/txt_endereco"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_telefone" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

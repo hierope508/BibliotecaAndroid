@@ -1,6 +1,7 @@
 package com.example.aps_irh.Model;
 
 public class CatLeitor extends Abstract_Cadastro {
+    private int idCatLeitor;
     private String cod;
     private String descricao;
     private int maxDays;
@@ -9,7 +10,12 @@ public class CatLeitor extends Abstract_Cadastro {
 
     }
 
-    public CatLeitor(String cod, String descricao, int maxDays) {
+    public int getIdCatLeitor() {
+        return idCatLeitor;
+    }
+
+    public CatLeitor(int idCatLeitor, String cod, String descricao, int maxDays) {
+        this.idCatLeitor = idCatLeitor;
         this.cod = cod;
         this.descricao = descricao;
         this.maxDays = maxDays;
@@ -47,5 +53,10 @@ public class CatLeitor extends Abstract_Cadastro {
     @Override
     public void Atualizar() {
 
+    }
+
+    @Override
+    public String toString(){
+        return this.descricao;
     }
 }

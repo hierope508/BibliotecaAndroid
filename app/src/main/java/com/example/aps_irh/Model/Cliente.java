@@ -7,11 +7,22 @@ public class Cliente extends Abstract_Cadastro{
     private String telefone;
     private String email;
 
+    private int codCliente;
+
+    public int getCodCliente() {
+        return codCliente;
+    }
+
+    public void setCodCliente(int codCliente) {
+        this.codCliente = codCliente;
+    }
+
     public Cliente(){
 
     }
 
-    public Cliente(String nome, String endereco, String telefone, String email) {
+    public Cliente(int codCliente, String nome, String endereco, String telefone, String email) {
+        this.codCliente = codCliente;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
@@ -58,5 +69,10 @@ public class Cliente extends Abstract_Cadastro{
     @Override
     public void Atualizar() {
 
+    }
+
+    @Override
+    public String toString(){
+        return this.nome;
     }
 }
