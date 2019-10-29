@@ -23,6 +23,9 @@
     <string name="txt_DescCat">Descrição da Categoria</string>
     <string name="txt_MaxCatLeitor">Número Max. Dias Emprest.</string>
 
-
+    <string name="txt_ClienteNome">Nome do cliente</string>
+    <string name="txt_ClienteEndereco">Endereço</string>
+    <string name="txt_ClienteTelefone">Telefone</string>
+    <string name="txt_ClienteEmail">Email</string>
 </resources>
 
