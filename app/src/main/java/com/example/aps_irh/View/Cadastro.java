@@ -69,7 +69,7 @@ private int currentTabID  = -1;
     }
 
     private void HandlerTabClick(TabLayout.Tab tab, String query){
-
+        currentTabID = -1;
         switch(tab.getPosition()){
             case 0:
                 ArrayList<Abstract_Cadastro> catLeitores = new ArrayList<>();
@@ -120,6 +120,16 @@ private int currentTabID  = -1;
                 codCat.setText(((CatLeitor)cadastro).getCod());
                 maxDays.setText(String.valueOf(((CatLeitor)cadastro).getMaxDays()));
 
+            }else if (cadastro instanceof Cliente){
+                EditText nomeCli = findViewById(R.id.txt_NomeCliente);
+                EditText enderecoCli = findViewById(R.id.txt_ClienteEndereco);
+                EditText telefone = findViewById(R.id.txt_telefone);
+                EditText email = findViewById(R.id.txt_ClienteEmail);
+
+                nomeCli.setText(((Cliente)cadastro).getNome());
+                enderecoCli.setText(((Cliente)cadastro).getEndereco());
+                telefone.setText(((Cliente)cadastro).getTelefone());
+                email.setText(((Cliente)cadastro).getEmail());
             }
 
         }
@@ -142,23 +152,33 @@ private int currentTabID  = -1;
 
                     if (!isNew)
                         result = new ControlCatLeitor(getApplicationContext()).Update((CatLeitor) cadastro);
-                    else {
+                    else
                         result = new ControlCatLeitor(getApplicationContext()).Insert((CatLeitor) cadastro);
-                    }
+
+                }else if(cadastro instanceof Cliente){
+                    EditText nomeCli = findViewById(R.id.txt_NomeCliente);
+                    EditText enderecoCli = findViewById(R.id.txt_ClienteEndereco);
+                    EditText telefone = findViewById(R.id.txt_telefone);
+                    EditText email = findViewById(R.id.txt_ClienteEmail);
+
+                    ((Cliente) cadastro).setNome(nomeCli.getText().toString());
+                    ((Cliente) cadastro).setEndereco(enderecoCli.getText().toString());
+                    ((Cliente) cadastro).setTelefone(telefone.getText().toString());
+                    ((Cliente) cadastro).setEmail(email.getText().toString());
+
+                    if (!isNew)
+                        result = new ControlCliente(getApplicationContext()).Update((Cliente) cadastro);
+                    else
+                        result = new ControlCliente(getApplicationContext()).Insert((Cliente) cadastro);
                 }
-
-                if(cadastro instanceof Cliente){
-
-                }
-
 
                 if(result==-1)
                     Toast.makeText(context, "Ocorreu um erro ao cadastrar/atualizar o registro", Toast.LENGTH_SHORT).show();
                 else{
                     Toast.makeText(context, "Registro cadastrado/atualizado com sucesso", Toast.LENGTH_SHORT).show();
-                    HandlerTabClick(tabs.getTabAt(0));
                 }
 
+                HandlerTabClick(tabs.getTabAt(tabs.getSelectedTabPosition()));
             }
         });
 
@@ -197,7 +217,7 @@ private int currentTabID  = -1;
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                //onQueryTextSubmit(newText);
                 return false;
             }
         });
