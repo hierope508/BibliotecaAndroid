@@ -25,9 +25,11 @@ public class ControlCatLeitor {
         Cursor cursor;
 
         ArrayList<Abstract_Cadastro> list = new ArrayList<>();
-        CatLeitor c0 = new CatLeitor(0,"0", "Adicionar (+)", 0);
 
-        list.add(c0);
+        if(where == null){
+            CatLeitor c0 = new CatLeitor(0,"0", "Adicionar (+)", 0);
+            list.add(c0);
+        }
 
         db = banco.getReadableDatabase();
 

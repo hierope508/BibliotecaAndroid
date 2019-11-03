@@ -56,7 +56,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/lbl_ClienteTelefone"
+        android:id="@+id/lbl_NumMaxCatLeit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/lbl_ClienteNome"
+        android:id="@+id/lbl_CodCatLeit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
@@ -74,7 +74,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/lbl_ClienteEndereco"
+        android:id="@+id/lbl_DescCatLeitores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"

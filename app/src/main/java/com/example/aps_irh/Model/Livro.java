@@ -124,13 +124,4 @@ public class Livro extends Abstract_Cadastro{
         this.numPaginas = numPaginas;
     }
 
-    @Override
-    public void Cadastrar() {
-
-    }
-
-    @Override
-    public void Atualizar() {
-
-    }
 }

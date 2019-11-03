@@ -6,6 +6,7 @@ public class Cliente extends Abstract_Cadastro{
     private String endereco;
     private String telefone;
     private String email;
+    private CatLeitor catLeitor;
 
     private int codCliente;
 
@@ -21,12 +22,21 @@ public class Cliente extends Abstract_Cadastro{
 
     }
 
-    public Cliente(int codCliente, String nome, String endereco, String telefone, String email) {
+    public Cliente(int codCliente, String nome, String endereco, String telefone, String email, CatLeitor catLeitor) {
         this.codCliente = codCliente;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
         this.email = email;
+        this.catLeitor = catLeitor;
+    }
+
+    public void setCatLeitor(CatLeitor catLeitor) {
+        this.catLeitor = catLeitor;
+    }
+
+    public CatLeitor getCatLeitor() {
+        return catLeitor;
     }
 
     public String getNome() {
@@ -61,18 +71,13 @@ public class Cliente extends Abstract_Cadastro{
         this.email = email;
     }
 
-    @Override
-    public void Cadastrar() {
-
-    }
-
-    @Override
-    public void Atualizar() {
-
-    }
 
     @Override
     public String toString(){
         return this.nome;
+    }
+
+    public String getCatLeitorString(){
+        return  catLeitor.toString();
     }
 }

@@ -12,9 +12,11 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.aps_irh.Control.ControlCatLeitor;
+import com.example.aps_irh.Control.ControlCatLivro;
 import com.example.aps_irh.Control.ControlCliente;
 import com.example.aps_irh.Model.Abstract_Cadastro;
 import com.example.aps_irh.Model.CatLeitor;
@@ -26,6 +28,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class Cadastro extends AppCompatActivity{
 private TabLayout tabs;
@@ -81,7 +84,13 @@ private int currentTabID  = -1;
                 break;
 
             case 1:
-                LoadCatTab(R.layout.cat_livros_fragment, R.id.btn_CatLivros, new CatLivro(),false);
+                ArrayList<Abstract_Cadastro> catLivro= new ArrayList<>();
+                ControlCatLivro controlerCatLivro= new ControlCatLivro(this.getBaseContext());
+                catLivro = controlerCatLivro.Select(query);
+
+                LoadListTab(R.layout.cat_livros_list_fragment_fragment, R.id.listViewCatLivros, R.id.btn_CadastrarCatLivro,
+                        R.layout.cat_livros_fragment, R.id.searchView_cat_livros, catLivro);
+
                 break;
 
             case 2:
@@ -95,14 +104,14 @@ private int currentTabID  = -1;
                 break;
 
             case 3:
-                LoadCatTab(R.layout.livros_fragment, R.id.btn_Livros, new Livro(),false);
+                LoadListItemTab(R.layout.livros_fragment, R.id.btn_Livros, new Livro(),false);
                 break;
         }
 
 
     }
 
-    private void LoadCatTab(int layoutID, int buttonID, final Abstract_Cadastro cadastro, final boolean isNew ){
+    private void LoadListItemTab(int layoutID, int buttonID, final Abstract_Cadastro cadastro, final boolean isNew ){
         currentTabID = tabs.getSelectedTabPosition();
         f.removeAllViews();
         LayoutInflater.from(context).inflate(layoutID, f, true);
@@ -125,15 +134,61 @@ private int currentTabID  = -1;
                 EditText enderecoCli = findViewById(R.id.txt_ClienteEndereco);
                 EditText telefone = findViewById(R.id.txt_telefone);
                 EditText email = findViewById(R.id.txt_ClienteEmail);
+                EditText codCliente = findViewById(R.id.txt_codCliente);
+                Spinner spinner = findViewById(R.id.spinner_CatLeitor);
+
+                ControlCatLeitor controlCatLeitor = new ControlCatLeitor(context);
+
+                ArrayList<Abstract_Cadastro> list =  controlCatLeitor.Select("");
+
+                final ArrayAdapter<Abstract_Cadastro> adapter = new ArrayAdapter<Abstract_Cadastro>(context, R.layout.support_simple_spinner_dropdown_item, list);
+
+                int index = -1;
+
+                for(int i = 0; i<list.size();i++){
+                    if(1 == ((Cliente) cadastro).getCatLeitor().toString().compareToIgnoreCase(((CatLeitor)list.get(i)).toString())){
+                        index = i+1;
+                    }
+                }
+
+                spinner.setAdapter(adapter);
+                spinner.setSelection(index);
 
                 nomeCli.setText(((Cliente)cadastro).getNome());
                 enderecoCli.setText(((Cliente)cadastro).getEndereco());
                 telefone.setText(((Cliente)cadastro).getTelefone());
                 email.setText(((Cliente)cadastro).getEmail());
+                codCliente.setText(String.valueOf(((Cliente)cadastro).getCodCliente()));
+
+                codCliente.setEnabled(false);
+
+            }else if (cadastro instanceof CatLivro){
+                EditText desCat = findViewById(R.id.txt_descCatLivro);
+                EditText codCat = findViewById(R.id.txt_CodCatLivro);
+                EditText maxDays = findViewById(R.id.txt_NumMaxCatLivro);
+
+                desCat.setText(((CatLivro)cadastro).getDescricao());
+                codCat.setText(((CatLivro)cadastro).getCod());
+                maxDays.setText(String.valueOf(((CatLivro)cadastro).getMaxDays()));
             }
 
         }
+        else{
+            if(cadastro instanceof Cliente){
+                Spinner spinner = findViewById(R.id.spinner_CatLeitor);
+                EditText codCliente = findViewById(R.id.txt_codCliente);
 
+                ControlCatLeitor controlCatLeitor = new ControlCatLeitor(context);
+
+                ArrayList<Abstract_Cadastro> list =  controlCatLeitor.Select("");
+
+                final ArrayAdapter<Abstract_Cadastro> adapter = new ArrayAdapter<Abstract_Cadastro>(context, R.layout.support_simple_spinner_dropdown_item, list);
+
+                spinner.setAdapter(adapter);
+                codCliente.setEnabled(false);
+
+            }
+        }
         b.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -146,6 +201,14 @@ private int currentTabID  = -1;
                     EditText codCat = findViewById(R.id.txt_CodCatLeit);
                     EditText maxDays = findViewById(R.id.txt_NumMaxCatLeit);
 
+                    if((desCat.getText().toString()).isEmpty() ||
+                        codCat.getText().toString().isEmpty() ||
+                        maxDays.getText().toString().isEmpty())
+                    {
+                        Toast.makeText(getApplicationContext(), "Todos os campos são obrigatórios",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     ((CatLeitor) cadastro).setDescricao(desCat.getText().toString());
                     ((CatLeitor) cadastro).setCod(codCat.getText().toString());
                     ((CatLeitor) cadastro).setMaxDays(Integer.valueOf(maxDays.getText().toString()));
@@ -155,21 +218,60 @@ private int currentTabID  = -1;
                     else
                         result = new ControlCatLeitor(getApplicationContext()).Insert((CatLeitor) cadastro);
 
-                }else if(cadastro instanceof Cliente){
+                }
+                else if(cadastro instanceof Cliente){
                     EditText nomeCli = findViewById(R.id.txt_NomeCliente);
                     EditText enderecoCli = findViewById(R.id.txt_ClienteEndereco);
                     EditText telefone = findViewById(R.id.txt_telefone);
                     EditText email = findViewById(R.id.txt_ClienteEmail);
+                    Spinner spinner = findViewById(R.id.spinner_CatLeitor);
+
+                    CatLeitor catLeitor = (CatLeitor) (spinner.getSelectedItem());
 
                     ((Cliente) cadastro).setNome(nomeCli.getText().toString());
                     ((Cliente) cadastro).setEndereco(enderecoCli.getText().toString());
                     ((Cliente) cadastro).setTelefone(telefone.getText().toString());
                     ((Cliente) cadastro).setEmail(email.getText().toString());
+                    ((Cliente) cadastro).setCatLeitor(catLeitor);
+
+                    if((nomeCli.getText().toString()).isEmpty() ||
+                            enderecoCli.getText().toString().isEmpty() ||
+                            telefone.getText().toString().isEmpty() ||
+                            email.getText().toString().isEmpty()
+                    )
+                    {
+                        Toast.makeText(context, "Todos os campos são obrigatórios",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
                     if (!isNew)
                         result = new ControlCliente(getApplicationContext()).Update((Cliente) cadastro);
                     else
                         result = new ControlCliente(getApplicationContext()).Insert((Cliente) cadastro);
+                }
+                else if(cadastro instanceof CatLivro){
+
+                    EditText desCat = findViewById(R.id.txt_descCatLivro);
+                    EditText codCat = findViewById(R.id.txt_CodCatLivro);
+                    EditText maxDays = findViewById(R.id.txt_NumMaxCatLivro);
+
+                    if((desCat.getText().toString()).isEmpty() ||
+                            codCat.getText().toString().isEmpty() ||
+                            maxDays.getText().toString().isEmpty())
+                    {
+                        Toast.makeText(getApplicationContext(), "Todos os campos são obrigatórios",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    ((CatLivro) cadastro).setDescricao(desCat.getText().toString());
+                    ((CatLivro) cadastro).setCod(codCat.getText().toString());
+                    ((CatLivro) cadastro).setMaxDays(Integer.valueOf(maxDays.getText().toString()));
+
+                    if (!isNew)
+                        result = new ControlCatLivro(getApplicationContext()).Update((CatLivro) cadastro);
+                    else
+                        result = new ControlCatLivro(getApplicationContext()).Insert((CatLivro) cadastro);
+
                 }
 
                 if(result==-1)
@@ -201,7 +303,7 @@ private int currentTabID  = -1;
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                LoadCatTab(layoutInfoID, buttonID, cadastro.get(position), position==0);
+                LoadListItemTab(layoutInfoID, buttonID, cadastro.get(position), position==0);
             }
         });
 

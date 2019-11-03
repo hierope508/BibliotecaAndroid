@@ -46,17 +46,7 @@ public class CatLeitor extends Abstract_Cadastro {
     }
 
     @Override
-    public void Cadastrar() {
-
-    }
-
-    @Override
-    public void Atualizar() {
-
-    }
-
-    @Override
     public String toString(){
-        return this.descricao;
+        return idCatLeitor == 0 ? this.descricao: this.getCod() + " - " + this.descricao;
     }
 }

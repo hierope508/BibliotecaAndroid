@@ -7,6 +7,66 @@
     android:layout_height="match_parent"
     tools:context=".View.Fragments.ClientsFrag">
 
+    <EditText
+        android:id="@+id/txt_codCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/txt_NomeCliente2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Cod Cliente"
+        app:layout_constraintBottom_toTopOf="@+id/lbl_ClienteNome2"
+        app:layout_constraintEnd_toStartOf="@+id/txt_codCliente"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.654" />
+
+    <TextView
+        android:id="@+id/lbl_ClienteNome2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/txt_ClienteNome"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_NomeCliente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_NomeCliente" />
+
+    <EditText
+        android:id="@+id/txt_NomeCliente2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbl_CatLeitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/txt_CodCat"
+        app:layout_constraintBottom_toTopOf="@+id/btn_CadastrarClientes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_ClienteEmail"
+        app:layout_constraintVertical_bias="0.456" />
+
     <TextView
         android:id="@+id/lbl_ClienteEmail"
         android:layout_width="wrap_content"
@@ -21,11 +81,10 @@
         android:id="@+id/btn_CadastrarClientes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
+        android:layout_marginBottom="160dp"
         android:text="@string/lbl_Cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -125,6 +184,17 @@
         android:text="@string/txt_ClienteEndereco"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbl_ClienteTelefone" />
+
+    <Spinner
+        android:id="@+id/spinner_CatLeitor"
+        android:layout_width="178dp"
+        android:layout_height="43dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_CadastrarClientes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.443"
+        app:layout_constraintStart_toEndOf="@+id/lbl_CatLeitor"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ClienteEmail"
+        app:layout_constraintVertical_bias="0.287" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

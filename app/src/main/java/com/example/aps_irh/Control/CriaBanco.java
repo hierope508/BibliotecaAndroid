@@ -22,6 +22,8 @@ public class CriaBanco extends SQLiteOpenHelper {
                 "    ,endereco TEXT NOT NULL " +
                 "    ,telefone TEXT NOT NULL " +
                 "    ,email TEXT NOT NULL " +
+                "    ,codCatLeitor TEXT NOT NULL" +
+                "    ,FOREIGN KEY(CodCatLeitor ) REFERENCES CatLeitor(CodCatLeitor ) " +
                 "); ";
         String sql2 =
                 " CREATE TABLE IF NOT EXISTS CatLivro( " +
