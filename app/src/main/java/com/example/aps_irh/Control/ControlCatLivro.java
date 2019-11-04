@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class ControlCatLivro {
 
-    private final String[] campos = {"idCatLivro", "CodCatLivro", "Descricao", "maxDays"};
+    private final String[] campos = {"idCatLivro", "CodCatLivro", "Descricao", "maxDays", "tax"};
 
     private CriaBanco banco;
     private SQLiteDatabase db;
@@ -24,11 +24,12 @@ public class ControlCatLivro {
 
     public ArrayList<Abstract_Cadastro> Select(String where){
         Cursor cursor;
-
         ArrayList<Abstract_Cadastro> list = new ArrayList<>();
-        CatLivro c0 = new CatLivro(0,"0", "Adicionar (+)", 0);
 
-        list.add(c0);
+        if(where == null) {
+            CatLivro c0 = new CatLivro(0, "0", "Adicionar (+)", 0);
+            list.add(c0);
+        }
 
         db = banco.getReadableDatabase();
 
@@ -87,7 +88,7 @@ public class ControlCatLivro {
         ContentValues valores = new ContentValues();
         long resultado;
 
-        valores.put("CodCatLeitor", catLivro.getCod());
+        valores.put("CodCatLivro", catLivro.getCod());
         valores.put("Descricao",catLivro.getDescricao());
         valores.put("maxDays",catLivro.getMaxDays());
         String where = "idCatLivro = {idCatLivro}".replace("{idCatLivro}",

@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ExpandableListAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.example.aps_irh.Control.ControlCatLeitor;
 import com.example.aps_irh.Control.ControlCatLivro;
 import com.example.aps_irh.Control.ControlCliente;
+import com.example.aps_irh.Control.ControlLivro;
 import com.example.aps_irh.Model.Abstract_Cadastro;
 import com.example.aps_irh.Model.CatLeitor;
 import com.example.aps_irh.Model.CatLivro;
@@ -26,8 +29,11 @@ import com.example.aps_irh.Model.Livro;
 import com.example.aps_irh.R;
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 
 public class Cadastro extends AppCompatActivity{
@@ -96,7 +102,13 @@ private int currentTabID  = -1;
             case 2:
                 ArrayList<Abstract_Cadastro> clientes = new ArrayList<>();
                 ControlCliente controlerCliente = new ControlCliente(this.getBaseContext());
-                clientes = controlerCliente.Select(query);
+
+                try {
+                    clientes = controlerCliente.Select(query);
+                }
+                catch (Exception ex){
+                    Toast.makeText(context, "Erro", Toast.LENGTH_SHORT).show();
+                }
 
                 LoadListTab(R.layout.clientes__list_fragment, R.id.listviewClientes, R.id.btn_CadastrarClientes,
                         R.layout.clients_fragment, R.id.searchView_clientes, clientes);
@@ -104,7 +116,16 @@ private int currentTabID  = -1;
                 break;
 
             case 3:
-                LoadListItemTab(R.layout.livros_fragment, R.id.btn_Livros, new Livro(),false);
+                ArrayList<Abstract_Cadastro> livros = new ArrayList<>();
+                ControlLivro controlLivro = new ControlLivro(this.getBaseContext());
+                try {
+                    livros  = controlLivro.Select(query);
+                }catch (Exception ex){
+                    Toast.makeText(context, "Erro", Toast.LENGTH_SHORT).show();
+                }
+
+                LoadListTab(R.layout.livro__list_fragement, R.id.listviewLivros, R.id.btn_Livros,
+                        R.layout.livros_fragment, R.id.searchView_Livros ,livros);
                 break;
         }
 
@@ -135,6 +156,8 @@ private int currentTabID  = -1;
                 EditText telefone = findViewById(R.id.txt_telefone);
                 EditText email = findViewById(R.id.txt_ClienteEmail);
                 EditText codCliente = findViewById(R.id.txt_codCliente);
+                EditText cpf = findViewById(R.id.txt_CPF);
+                EditText nascimento = findViewById(R.id.txt_nascimento);
                 Spinner spinner = findViewById(R.id.spinner_CatLeitor);
 
                 ControlCatLeitor controlCatLeitor = new ControlCatLeitor(context);
@@ -159,6 +182,15 @@ private int currentTabID  = -1;
                 telefone.setText(((Cliente)cadastro).getTelefone());
                 email.setText(((Cliente)cadastro).getEmail());
                 codCliente.setText(String.valueOf(((Cliente)cadastro).getCodCliente()));
+                cpf.setText(((Cliente)cadastro).getCpf());
+
+                Date date = ((Cliente) cadastro).getNascimento();
+
+                int day = date.getDate();
+                int month = date.getMonth() + 1;
+                int year = date.getYear();
+
+                nascimento.setText(String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year));
 
                 codCliente.setEnabled(false);
 
@@ -170,6 +202,51 @@ private int currentTabID  = -1;
                 desCat.setText(((CatLivro)cadastro).getDescricao());
                 codCat.setText(((CatLivro)cadastro).getCod());
                 maxDays.setText(String.valueOf(((CatLivro)cadastro).getMaxDays()));
+            }
+            else if(cadastro instanceof Livro){
+                EditText codLivro = findViewById(R.id.txt_codLivro);
+                EditText ISBN = findViewById(R.id.txt_ISBN);
+                EditText titulo = findViewById(R.id.txt_Titulo);
+                EditText numEd = findViewById(R.id.txt_NumEd);
+                Spinner catLivro= findViewById(R.id.spinner_catLivro);
+                EditText autores = findViewById(R.id.txt_Autores);
+                EditText paginas = findViewById(R.id.txt_paginas);
+                EditText palavras = findViewById(R.id.txt_key);
+                EditText datapub = findViewById(R.id.txt_DataPub);
+                EditText editora = findViewById(R.id.txt_editora);
+
+                ControlCatLivro controlCatLivro= new ControlCatLivro(context);
+
+                ArrayList<Abstract_Cadastro> list =  controlCatLivro.Select("");
+
+                final ArrayAdapter<Abstract_Cadastro> adapter = new ArrayAdapter<Abstract_Cadastro>(context, R.layout.support_simple_spinner_dropdown_item, list);
+
+                int index = -1;
+
+                for(int i = 0; i<list.size();i++){
+                    if(1 == ((Livro) cadastro).getCatLivro().toString().compareToIgnoreCase(((CatLivro)list.get(i)).toString())){
+                        index = i+1;
+                    }
+                }
+
+                catLivro.setAdapter(adapter);
+                catLivro.setSelection(index);
+
+                codLivro.setText(((Livro) cadastro).getCod());
+                ISBN.setText(((Livro) cadastro).getISBN());
+                titulo.setText(((Livro) cadastro).getTitulo());
+                numEd.setText(String.valueOf(((Livro) cadastro).getNumEdicao()));
+                autores.setText(((Livro) cadastro).getAutores());
+                paginas.setText(String.valueOf(((Livro) cadastro).getNumPaginas()));
+                palavras.setText(((Livro) cadastro).getPalavrasChave());
+                editora.setText(((Livro) cadastro).getEditora());
+                Date date = ((Livro) cadastro).getDataPublicacao();
+
+                int day = date.getDate();
+                int month = date.getMonth() + 1;
+                int year = date.getYear();
+
+                datapub.setText(String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year));
             }
 
         }
@@ -187,6 +264,16 @@ private int currentTabID  = -1;
                 spinner.setAdapter(adapter);
                 codCliente.setEnabled(false);
 
+            }else if(cadastro instanceof Livro){
+                Spinner spinner = findViewById(R.id.spinner_catLivro);
+
+                ControlCatLivro controlCatLivro= new ControlCatLivro (context);
+
+                ArrayList<Abstract_Cadastro> list =  controlCatLivro.Select("");
+
+                final ArrayAdapter<Abstract_Cadastro> adapter = new ArrayAdapter<Abstract_Cadastro>(context, R.layout.support_simple_spinner_dropdown_item, list);
+
+                spinner.setAdapter(adapter);
             }
         }
         b.setOnClickListener(new View.OnClickListener() {
@@ -224,6 +311,8 @@ private int currentTabID  = -1;
                     EditText enderecoCli = findViewById(R.id.txt_ClienteEndereco);
                     EditText telefone = findViewById(R.id.txt_telefone);
                     EditText email = findViewById(R.id.txt_ClienteEmail);
+                    EditText cpf = findViewById(R.id.txt_CPF);
+                    EditText nascimento= findViewById(R.id.txt_nascimento);
                     Spinner spinner = findViewById(R.id.spinner_CatLeitor);
 
                     CatLeitor catLeitor = (CatLeitor) (spinner.getSelectedItem());
@@ -233,6 +322,31 @@ private int currentTabID  = -1;
                     ((Cliente) cadastro).setTelefone(telefone.getText().toString());
                     ((Cliente) cadastro).setEmail(email.getText().toString());
                     ((Cliente) cadastro).setCatLeitor(catLeitor);
+                    ((Cliente) cadastro).setCpf(cpf.getText().toString());
+
+                    String date = nascimento.getText().toString();
+                    if(date.length() < 8)
+                    {
+                        Toast.makeText(context,"Formato de date inválida. Formato aceito: dd/mm/aa",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    try {
+                        int day = Integer.valueOf(date.substring(0, date.indexOf("/")));
+                        int month = Integer.valueOf(date.substring(date.indexOf("/")+1,date.indexOf("/")+3));
+                        int year = Integer.valueOf(date.substring(date.indexOf("/")+4,date.indexOf("/")+6));
+
+                        if(day<1 || day> 31||month<1 ||month>12)
+                        {
+                            Toast.makeText(context,"Valor do dia ou mês fora do range esperado",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        ((Cliente) cadastro).setNascimento(new Date(year,month-1,day));
+
+                    }catch (Exception ex){
+                        Toast.makeText(context,"Formato de date inválida. Formato aceito: dd/mm/aa",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
                     if((nomeCli.getText().toString()).isEmpty() ||
                             enderecoCli.getText().toString().isEmpty() ||
@@ -271,6 +385,75 @@ private int currentTabID  = -1;
                         result = new ControlCatLivro(getApplicationContext()).Update((CatLivro) cadastro);
                     else
                         result = new ControlCatLivro(getApplicationContext()).Insert((CatLivro) cadastro);
+
+                }else if(cadastro instanceof  Livro){
+                    EditText codLivro = findViewById(R.id.txt_codLivro);
+                    EditText ISBN = findViewById(R.id.txt_ISBN);
+                    EditText titulo = findViewById(R.id.txt_Titulo);
+                    EditText numEd = findViewById(R.id.txt_NumEd);
+                    Spinner catLivro= findViewById(R.id.spinner_catLivro);
+                    EditText autores = findViewById(R.id.txt_Autores);
+                    EditText paginas = findViewById(R.id.txt_paginas);
+                    EditText palavras = findViewById(R.id.txt_key);
+                    EditText datapub = findViewById(R.id.txt_DataPub);
+                    EditText editora = findViewById(R.id.txt_editora);
+
+                    CatLivro categoria= (CatLivro)(catLivro.getSelectedItem());
+
+
+                    ((Livro) cadastro).setCod(codLivro.getText().toString());
+                    ((Livro) cadastro).setISBN(ISBN.getText().toString());
+                    ((Livro) cadastro).setTitulo(titulo.getText().toString());
+                    ((Livro) cadastro).setNumEdicao(Integer.valueOf(numEd.getText().toString()));
+                    ((Livro) cadastro).setAutores(autores.getText().toString());
+                    ((Livro) cadastro).setNumPaginas(Integer.valueOf(paginas.getText().toString()));
+                    ((Livro) cadastro).setPalavrasChave(palavras.getText().toString());
+                    ((Livro) cadastro).setCatLivro(categoria);
+                    ((Livro) cadastro).setEditora(editora.getText().toString());
+
+                    String date = datapub.getText().toString();
+                    if(date.length() < 8)
+                    {
+                        Toast.makeText(context,"Formato de date inválida. Formato aceito: dd/mm/aa",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    try {
+                        int day = Integer.valueOf(date.substring(0, date.indexOf("/")));
+                        int month = Integer.valueOf(date.substring(date.indexOf("/")+1,date.indexOf("/")+3));
+                        int year = Integer.valueOf(date.substring(date.indexOf("/")+4,date.indexOf("/")+6));
+
+                        if(day<1 || day> 31||month<1 ||month>12)
+                        {
+                            Toast.makeText(context,"Valor do dia ou mês fora do range esperado",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        ((Livro) cadastro).setDataPublicacao(new Date(year,month-1,day));
+
+                    }catch (Exception ex){
+                        Toast.makeText(context,"Formato de date inválida. Formato aceito: dd/mm/aa",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if(codLivro.getText().toString().isEmpty() ||
+                            ISBN.getText().toString().isEmpty() ||
+                            titulo.getText().toString().isEmpty() ||
+                            numEd.getText().toString().isEmpty() ||
+                            autores.getText().toString().isEmpty() ||
+                            paginas.getText().toString().isEmpty() ||
+                            palavras.getText().toString().isEmpty() ||
+                            datapub.getText().toString().isEmpty() ||
+                            editora.getText().toString().isEmpty()
+                    )
+                    {
+                        Toast.makeText(context, "Todos os campos são obrigatórios",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (!isNew)
+                        result = new ControlLivro(getApplicationContext()).Update((Livro) cadastro);
+                    else
+                        result = new ControlLivro(getApplicationContext()).Insert((Livro) cadastro);
 
                 }
 

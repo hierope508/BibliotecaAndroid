@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 public class CriaBanco extends SQLiteOpenHelper {
 
     private static final String NOME_BANCO = "Banco.db";
-    private static final int VERSAO = 2;
+    private static final int VERSAO = 1;
 
     public CriaBanco(@Nullable Context context) {
         super(context, NOME_BANCO, null, VERSAO);
@@ -22,6 +22,8 @@ public class CriaBanco extends SQLiteOpenHelper {
                 "    ,endereco TEXT NOT NULL " +
                 "    ,telefone TEXT NOT NULL " +
                 "    ,email TEXT NOT NULL " +
+                "    ,CPF TEXT" +
+                "    ,dtNascimento DATE" +
                 "    ,codCatLeitor TEXT NOT NULL" +
                 "    ,FOREIGN KEY(CodCatLeitor ) REFERENCES CatLeitor(CodCatLeitor ) " +
                 "); ";
@@ -31,6 +33,7 @@ public class CriaBanco extends SQLiteOpenHelper {
                 "    ,CodCatLivro TEXT NOT NULL " +
                 "    ,Descricao TEXT NOT NULL " +
                 "    ,maxDays INTEGER " +
+                "    ,tax INTEGER" +
                 ");" ;
         String sql3 =
                 "CREATE TABLE IF NOT EXISTS CatLeitor( " +
@@ -45,20 +48,36 @@ public class CriaBanco extends SQLiteOpenHelper {
                 "    ,CodLivro TEXT NOT NULL " +
                 "    ,ISBN TEXT NOT NULL " +
                 "    ,Titulo TEXT NOT NULL " +
-                "    ,idCatLivro INTEGER " +
+                "    ,CodCatLivro TEXT " +
                 "    ,autores TEXT NOT NULL " +
                 "    ,palavrasChave TEXT NOT NULL " +
                 "    ,dataPublicacao DATE " +
                 "    ,numEdicao INTEGER NOT NULL " +
                 "    ,editora TEXT " +
                 "    ,numPaginas INTEGER " +
-                "    ,FOREIGN KEY(idCatLivro) REFERENCES CatLivro(idCatLivro) " +
+                "    ,codCliente TEXT" +
+                "    ,dtPrevista DATE" +
+                "    ,FOREIGN KEY(CodCatLivro) REFERENCES CatLivro(CodCatLivro) " +
+                "    ,FOREIGN KEY(codCliente) REFERENCES Cliente(codCliente) " +
                 "); ";
+
+
+        String sql5 = "INSERT INTO CatLeitor(CodCatLeitor, Descricao, maxDays) " +
+                "VALUES ('001', 'Estudante', 60) " +
+                ",('002', 'Professor', 90) " +
+                ",('003', 'Usuário Comum', 30); ";
+
+        String sql6 = "INSERT INTO CatLivro(CodCatLivro, Descricao, maxDays, tax) VALUES ('001', 'Livro', 60, 10) " +
+                ",('002', 'Revista', 90, 10) " +
+                ",('003', 'Relatório Técnico', 100, 20); ";
 
         db.execSQL(sql1);
         db.execSQL(sql2);
         db.execSQL(sql3);
         db.execSQL(sql4);
+        db.execSQL(sql5);
+        db.execSQL(sql6);
+
     }
 
     @Override

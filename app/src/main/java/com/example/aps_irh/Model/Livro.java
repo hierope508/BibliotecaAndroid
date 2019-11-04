@@ -2,6 +2,8 @@ package com.example.aps_irh.Model;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.NonNull;
+
 import com.example.aps_irh.Control.CriaBanco;
 
 import java.util.Date;
@@ -12,8 +14,8 @@ public class Livro extends Abstract_Cadastro{
     private String ISBN;
     private String titulo;
     private CatLivro catLivro;
-    private String[] autores;
-    private String[] palavrasChave;
+    private String autores;
+    private String palavrasChave;
     private Date dataPublicacao;
     private int numEdicao;
     private String editora;
@@ -25,8 +27,8 @@ public class Livro extends Abstract_Cadastro{
 
     }
 
-    public Livro(int id, String cod, String ISBN, String titulo, CatLivro catLivro, String[] autores,
-        String[] palavrasChave, Date dataPublicacao, int numEdicao, String editora, int numPaginas) {
+    public Livro(int id, String cod, String ISBN, String titulo, CatLivro catLivro, String autores,
+        String palavrasChave, Date dataPublicacao, int numEdicao, String editora, int numPaginas) {
         this.id = id;
         this.cod = cod;
         this.ISBN = ISBN;
@@ -76,19 +78,19 @@ public class Livro extends Abstract_Cadastro{
         this.catLivro = catLivro;
     }
 
-    public String[] getAutores() {
+    public String getAutores() {
         return autores;
     }
 
-    public void setAutores(String[] autores) {
+    public void setAutores(String autores) {
         this.autores = autores;
     }
 
-    public String[] getPalavrasChave() {
+    public String getPalavrasChave() {
         return palavrasChave;
     }
 
-    public void setPalavrasChave(String[] palavrasChave) {
+    public void setPalavrasChave(String palavrasChave) {
         this.palavrasChave = palavrasChave;
     }
 
@@ -124,4 +126,9 @@ public class Livro extends Abstract_Cadastro{
         this.numPaginas = numPaginas;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return id == 0 ? this.titulo: this.cod + " - " + this.titulo;
+    }
 }

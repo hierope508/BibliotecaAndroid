@@ -10,10 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".View.Consulta" />
-        <activity android:name=".View.Livros" />
-        <activity android:name=".View.Cat_Livros" />
-        <activity android:name=".View.Cat_Leitores" />
-        <activity android:name=".View.Clientes" />
         <activity android:name=".View.Cadastro">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
