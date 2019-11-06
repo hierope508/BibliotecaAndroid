@@ -23,8 +23,6 @@ public class Livro extends Abstract_Cadastro implements Serializable {
     private int numPaginas;
     private int codLeitor;
     private Date previsao;
-    private SQLiteDatabase db;
-    private CriaBanco banco;
 
     public Livro(){
 

@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
         btnConsult = findViewById(R.id.btnConsulta);
         btnSair = findViewById(R.id.btn_sair);
         btnEmprestar = findViewById(R.id.btn_emprestar);
-
+        btnSair.setEnabled(true);
+        btnEmprestar.setEnabled(true);
 
         btnCadast.setOnClickListener(new View.OnClickListener() {
             @Override

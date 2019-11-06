@@ -19,7 +19,7 @@ import java.util.Date;
 public class ControlLivro {
 
     private final String[] campos = {"idLivro","CodLivro", "ISBN", "Titulo", "CodCatLivro", "autores", "palavrasChave",
-            "dataPublicacao", "numEdicao", "editora", "numPaginas"};
+            "dataPublicacao", "numEdicao", "editora", "numPaginas","codCliente", "dtPrevista"};
 
 
     private CriaBanco banco;
@@ -31,20 +31,28 @@ public class ControlLivro {
         this._context = context;
     }
 
-    public ArrayList<Abstract_Cadastro> Select(String where) throws ParseException {
+    public ArrayList<Abstract_Cadastro> Select(String where, boolean disponiveis, int id) throws ParseException {
         Cursor cursor;
 
         ArrayList<Abstract_Cadastro> list = new ArrayList<>();
 
-        if(where == null){
+        if(where == null && !disponiveis){
             Livro l0 = new Livro(0,"0", "0", "Adicionar (+)", null, null,null, null,0,null,0,0,null);
             list.add(l0);
         }
 
         db = banco.getReadableDatabase();
 
-        if(where!=null)
+        if(where!=null && disponiveis)
             where = "Titulo LIKE '%{1}%' OR autores LIKE '%{1}%' OR editora LIKE '%{1}%'".replace("{1}",where);
+
+        if(disponiveis){
+            where  = "dtPrevista IS NULL";
+        }
+
+        if(id!= 0){
+            where  = "idLivro = " + String.valueOf(id);
+        }
 
         cursor = db.query("Livro",campos, where, null, null, null, null, null);
 
@@ -103,7 +111,7 @@ public class ControlLivro {
 
             index = cursor.getColumnIndexOrThrow("dtPrevista");
             iso8601Format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
-            if(cursor.getString(index) != null || !cursor.getString(index).isEmpty())
+            if(cursor.getString(index) != null && !cursor.getString(index).isEmpty())
                 dtPrevista = iso8601Format.parse(cursor.getString(index));
 
             index = cursor.getColumnIndexOrThrow("numPaginas");

@@ -34,7 +34,8 @@ public class ControlCliente {
         ArrayList<Abstract_Cadastro> list = new ArrayList<>();
         Cliente c0 = new Cliente(0, "Adicionar (+)", "","","", null,null,null);
 
-        list.add(c0);
+        if(where == null)
+            list.add(c0);
 
         db = banco.getReadableDatabase();
 

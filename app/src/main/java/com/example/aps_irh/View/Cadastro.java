@@ -119,7 +119,7 @@ private int currentTabID  = -1;
                 ArrayList<Abstract_Cadastro> livros = new ArrayList<>();
                 ControlLivro controlLivro = new ControlLivro(this.getBaseContext());
                 try {
-                    livros  = controlLivro.Select(query);
+                    livros  = controlLivro.Select(query,false,0);
                 }catch (Exception ex){
                     Toast.makeText(context, "Erro", Toast.LENGTH_SHORT).show();
                 }
