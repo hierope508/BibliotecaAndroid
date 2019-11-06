@@ -10,21 +10,43 @@
         android:id="@+id/btnConsulta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="149dp"
         android:text="@string/lbl_Consultar"
         app:layout_constraintBottom_toTopOf="@+id/btnCadastrar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.614" />
+        app:layout_constraintStart_toStartOf="@+id/btn_emprestar"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnCadastrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="264dp"
+        android:layout_marginBottom="3dp"
         android:text="@string/lbl_Cadastrar"
+        app:layout_constraintBottom_toTopOf="@+id/btn_emprestar"
+        app:layout_constraintStart_toStartOf="@+id/btnConsulta"
+        app:layout_constraintTop_toBottomOf="@+id/btnConsulta" />
+
+    <Button
+        android:id="@+id/btn_emprestar"
+        android:layout_width="105dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="3dp"
+        android:text="Emprestar"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sair"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCadastrar" />
+
+    <Button
+        android:id="@+id/btn_sair"
+        android:layout_width="105dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="384dp"
+        android:text="Sair"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_emprestar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

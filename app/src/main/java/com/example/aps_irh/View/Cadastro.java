@@ -86,7 +86,7 @@ private int currentTabID  = -1;
                 catLeitores = controler.Select(query);
 
                 LoadListTab(R.layout.cat_leitores__list_fragment, R.id.listViewCatLeit, R.id.btn_CadastrarCatLei,
-                        R.layout.cat_leitores_fragment, R.id.searchView_cat_leitores ,catLeitores);
+                        R.layout.cat_leitores_fragment, R.id.searchView_cat_leitores ,catLeitores, query);
                 break;
 
             case 1:
@@ -95,7 +95,7 @@ private int currentTabID  = -1;
                 catLivro = controlerCatLivro.Select(query);
 
                 LoadListTab(R.layout.cat_livros_list_fragment_fragment, R.id.listViewCatLivros, R.id.btn_CadastrarCatLivro,
-                        R.layout.cat_livros_fragment, R.id.searchView_cat_livros, catLivro);
+                        R.layout.cat_livros_fragment, R.id.searchView_cat_livros, catLivro, query);
 
                 break;
 
@@ -111,7 +111,7 @@ private int currentTabID  = -1;
                 }
 
                 LoadListTab(R.layout.clientes__list_fragment, R.id.listviewClientes, R.id.btn_CadastrarClientes,
-                        R.layout.clients_fragment, R.id.searchView_clientes, clientes);
+                        R.layout.clients_fragment, R.id.searchView_clientes, clientes, query);
 
                 break;
 
@@ -125,7 +125,7 @@ private int currentTabID  = -1;
                 }
 
                 LoadListTab(R.layout.livro__list_fragement, R.id.listviewLivros, R.id.btn_Livros,
-                        R.layout.livros_fragment, R.id.searchView_Livros ,livros);
+                        R.layout.livros_fragment, R.id.searchView_Livros ,livros, query);
                 break;
         }
 
@@ -470,7 +470,7 @@ private int currentTabID  = -1;
     }
 
     private void LoadListTab(final int layoutID, int viewID, final int buttonID, final int layoutInfoID,
-                             int searchID, final List<Abstract_Cadastro> cadastro){
+                             int searchID, final List<Abstract_Cadastro> cadastro, final String query){
 
         f.removeAllViews();
 
@@ -486,7 +486,7 @@ private int currentTabID  = -1;
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                LoadListItemTab(layoutInfoID, buttonID, cadastro.get(position), position==0);
+                LoadListItemTab(layoutInfoID, buttonID, cadastro.get(position), (position==0 && query == null));
             }
         });
 

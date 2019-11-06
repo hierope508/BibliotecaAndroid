@@ -1,4 +1,4 @@
-package com.example.aps_irh;
+package com.example.aps_irh.View.Fragments;
 
 import androidx.lifecycle.ViewModel;
 

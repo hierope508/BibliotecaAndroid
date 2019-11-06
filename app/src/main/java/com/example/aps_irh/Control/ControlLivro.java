@@ -37,7 +37,7 @@ public class ControlLivro {
         ArrayList<Abstract_Cadastro> list = new ArrayList<>();
 
         if(where == null){
-            Livro l0 = new Livro(0,"0", "0", "Adicionar (+)", null, null,null, null,0,null,0);
+            Livro l0 = new Livro(0,"0", "0", "Adicionar (+)", null, null,null, null,0,null,0,0,null);
             list.add(l0);
         }
 
@@ -57,7 +57,9 @@ public class ControlLivro {
             String codCatLivro;
             String autores;
             String palavrasChave;
+            int codCliente;
             Date datapublicacao;
+            Date dtPrevista = null;
             int numEdicao;
             String editora;
             int numPaginas;
@@ -96,10 +98,18 @@ public class ControlLivro {
             index = cursor.getColumnIndexOrThrow("editora");
             editora = cursor.getString(index);
 
+            index = cursor.getColumnIndexOrThrow("codCliente");
+            codCliente = cursor.getInt(index);
+
+            index = cursor.getColumnIndexOrThrow("dtPrevista");
+            iso8601Format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+            if(cursor.getString(index) != null || !cursor.getString(index).isEmpty())
+                dtPrevista = iso8601Format.parse(cursor.getString(index));
+
             index = cursor.getColumnIndexOrThrow("numPaginas");
             numPaginas = cursor.getInt(index);
 
-            Livro livro= new Livro(idLivro,codLivro,ISBN,titulo,catLivro,autores,palavrasChave,datapublicacao,numEdicao,editora,numPaginas);
+            Livro livro= new Livro(idLivro,codLivro,ISBN,titulo,catLivro,autores,palavrasChave,datapublicacao,numEdicao,editora,numPaginas,codCliente, dtPrevista);
             list.add(livro);
         }
         cursor.close();
@@ -146,6 +156,19 @@ public class ControlLivro {
         valores.put("numEdicao", livro.getNumEdicao());
         valores.put("editora", livro.getEditora());
         valores.put("numPaginas", livro.getNumPaginas());
+
+        if(livro.getPrevisao()!= null){
+            valores.put("dtPrevista", livro.getPrevisao().toString());
+        }else{
+            valores.putNull("dtPrevista");
+        }
+
+        if(livro.getCodLeitor()!= 0){
+            valores.put("codCliente", livro.getCodLeitor());
+        }else{
+            valores.putNull("codCliente");
+        }
+
         String where = "idLivro = {idLivro}".replace("{idLivro}",
                 String.valueOf(livro.getId()));
 

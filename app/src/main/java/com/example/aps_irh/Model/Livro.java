@@ -6,9 +6,10 @@ import androidx.annotation.NonNull;
 
 import com.example.aps_irh.Control.CriaBanco;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Livro extends Abstract_Cadastro{
+public class Livro extends Abstract_Cadastro implements Serializable {
     private int id;
     private String cod;
     private String ISBN;
@@ -20,6 +21,8 @@ public class Livro extends Abstract_Cadastro{
     private int numEdicao;
     private String editora;
     private int numPaginas;
+    private int codLeitor;
+    private Date previsao;
     private SQLiteDatabase db;
     private CriaBanco banco;
 
@@ -28,7 +31,8 @@ public class Livro extends Abstract_Cadastro{
     }
 
     public Livro(int id, String cod, String ISBN, String titulo, CatLivro catLivro, String autores,
-        String palavrasChave, Date dataPublicacao, int numEdicao, String editora, int numPaginas) {
+        String palavrasChave, Date dataPublicacao, int numEdicao, String editora, int numPaginas,
+         int codLeitor, Date previsao) {
         this.id = id;
         this.cod = cod;
         this.ISBN = ISBN;
@@ -130,5 +134,21 @@ public class Livro extends Abstract_Cadastro{
     @Override
     public String toString() {
         return id == 0 ? this.titulo: this.cod + " - " + this.titulo;
+    }
+
+    public int getCodLeitor() {
+        return codLeitor;
+    }
+
+    public void setCodLeitor(int codLeitor) {
+        this.codLeitor = codLeitor;
+    }
+
+    public Date getPrevisao() {
+        return previsao;
+    }
+
+    public void setPrevisao(Date previsao) {
+        this.previsao = previsao;
     }
 }
