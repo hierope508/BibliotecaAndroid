@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.aps_irh.View.Cadastro;
+import com.example.aps_irh.View.Consulta;
 import com.example.aps_irh.View.Emprestar;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Emprestar.class);
+                startActivity(i);
+            }
+        });
+
+        btnConsult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Consulta.class);
                 startActivity(i);
             }
         });

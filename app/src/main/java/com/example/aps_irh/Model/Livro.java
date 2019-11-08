@@ -42,6 +42,8 @@ public class Livro extends Abstract_Cadastro implements Serializable {
         this.numEdicao = numEdicao;
         this.editora = editora;
         this.numPaginas = numPaginas;
+        this.codLeitor = codLeitor;
+        this.previsao = previsao;
     }
 
     public int getId() {

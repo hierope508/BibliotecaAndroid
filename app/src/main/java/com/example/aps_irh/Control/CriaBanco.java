@@ -3,6 +3,8 @@ package com.example.aps_irh.Control;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 
 public class CriaBanco extends SQLiteOpenHelper {
@@ -71,12 +73,29 @@ public class CriaBanco extends SQLiteOpenHelper {
                 ",('002', 'Revista', 90, 10) " +
                 ",('003', 'Relatório Técnico', 100, 20); ";
 
+        String sql7 = "INSERT INTO Cliente(codCliente, nome, endereco, telefone,email,CPF,dtNascimento,codCatLeitor) " +
+                "VALUES (1, 'Iran', 'Rua dos Irans', '958216546546', 'irannlopes@gmail.com','54654654', 'Wed Oct 05 00:00:00 EST 1995', '001') " +
+                "      ,(2, 'Rodrigo', 'Rua dos Rodrigos', '958216546546', 'rodrigo@gmail.com', '54654654', 'Wed Oct 16 00:00:00 EST 1990', '002') " +
+                "      ,(3, 'Humner', 'Rua dos Beto', '958216546546', 'beto@gmail.com','54654654', 'Wed Oct 16 00:00:00 EST 1980', '003') ";
+
+        String sql8 = "INSERT INTO Livro(CodLivro, ISBN, Titulo, CodCatLivro,autores,palavrasChave,dataPublicacao,numEdicao, editora, numPaginas, codCliente, dtPrevista) " +
+                "VALUES ('001', '11111', 'O segredo das coisas', '001', 'Irna, asajs, José', 'livro, bom dmeais', 'Wed Oct 16 00:00:00 EST 2013', 10, 'Abril', 100, null, null) " +
+                "      ,('002', '645454', 'Fisica quantica', '003', 'Irna, asajs, José', 'livro, bom dmeais', 'Wed Oct 16 00:00:00 EST 2013', 10, 'Abril', 100, null, null) " +
+                "      ,('003', '5555', 'Veja', '002', 'Irna, asajs, José', 'livro, bom dmeais', 'Wed Oct 16 00:00:00 EST 2013', 10, 'Abril', 100, null, null) ";
+
+
         db.execSQL(sql1);
         db.execSQL(sql2);
         db.execSQL(sql3);
         db.execSQL(sql4);
         db.execSQL(sql5);
         db.execSQL(sql6);
+        try{
+            db.execSQL(sql7);
+            db.execSQL(sql8);
+        }catch (Exception ex){
+            ex.toString();
+        }
 
     }
 

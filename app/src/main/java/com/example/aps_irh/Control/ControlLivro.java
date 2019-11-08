@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class ControlLivro {
 
@@ -97,7 +98,7 @@ public class ControlLivro {
             palavrasChave = cursor.getString(index);
 
             index = cursor.getColumnIndexOrThrow("dataPublicacao");
-            DateFormat iso8601Format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+            DateFormat iso8601Format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
             datapublicacao = iso8601Format.parse(cursor.getString(index));
 
             index = cursor.getColumnIndexOrThrow("numEdicao");
@@ -110,9 +111,11 @@ public class ControlLivro {
             codCliente = cursor.getInt(index);
 
             index = cursor.getColumnIndexOrThrow("dtPrevista");
-            iso8601Format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+            iso8601Format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
             if(cursor.getString(index) != null && !cursor.getString(index).isEmpty())
                 dtPrevista = iso8601Format.parse(cursor.getString(index));
+
+
 
             index = cursor.getColumnIndexOrThrow("numPaginas");
             numPaginas = cursor.getInt(index);
