@@ -1,3 +1,11 @@
+# Android library app
+
+
+An Android app for borrowing books in a library.
+
+In this app, I used Java with Android Studio and MySql to make the CRUD with a local database
+
+
 # Aplicativo Android para biblioteca
 
 
